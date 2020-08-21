@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>web Components</title>
     <style>
-      div {
-        border: 2px solid orange;
+      * {
+        box-sizing: border-box;
+        font-family: sans-serif;
       }
-      /* .highlight {
-        background-color: #fcfc50;
-      } */
-      uc-tooltip {
-        border: 4px solid teal;
+
+      :root {
+        --color-primary: rgb(92, 214, 255);
+      }
+
+      html {
+        font-family: sans-serif;
       }
     </style>
     <script src="tooltip.js"></script>
@@ -23,16 +26,10 @@
       <uc-tooltip class="important" text="Web components is a set of standards">
         <span class="highlight">Web Components</span>
       </uc-tooltip>
-      are awesome
+      are awesome!
     </p>
 
     <uc-tooltip></uc-tooltip>
-
-    <hr />
-
-    <div>not styling for this div</div>
-
-    <hr />
 
     <a is="us-confirm-link" href="https://www.google.com">Google</a>
   </body>
