@@ -11,7 +11,7 @@ class ToggleContainer extends HTMLElement {
       </style>
       <button>Show</button>
       <p id='info-box'>
-        <slot></slot>
+        <slot>This works!!!</slot>
       <p>
       `;
     this._infoEl = this.shadowRoot.querySelector('p');

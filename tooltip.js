@@ -10,9 +10,17 @@ class Tooltip extends HTMLElement {
           position: absolute;
           background-color: #000;
           color: #fff;
-          z-index: 10;
-          border: 1px solid orange;
+          z-index: 10; 
           padding: 3px;
+        }
+
+        .highlight {
+          background-color: green;
+        }
+
+        ::slotted(.highlight) {
+          background-color: azure !important; 
+          border-bottom: 1px dotted red;
         }
       </style>
       <slot>Some default</slot>
