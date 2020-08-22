@@ -45,6 +45,15 @@
     <script>
       const confirmButton = document.querySelector('button');
       const modal = document.querySelector('uc-modal');
+
+      modal.addEventListener('confirm', () => {
+        console.log('confirmed...');
+      });
+
+      modal.addEventListener('cancel', () => {
+        console.log('cancelled...');
+      });
+
       confirmButton.addEventListener('click', () => {
         if (!modal.isOpen) {
           modal.open();

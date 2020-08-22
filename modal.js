@@ -47,8 +47,6 @@ class Modal extends HTMLElement {
           color: blue;
         }
 
-
-
         #main {
           padding: 1rem;
         }
@@ -74,12 +72,25 @@ class Modal extends HTMLElement {
           <slot></slot>
         </section>
         <section id="actions" >
-          <button>Cancel</button>
-          <button>Confirm</button>
+          <button id="cancel-btn">Cancel</button>
+          <button id="confirm-btn">Confirm</button>
         </section>
 
       </div>    
     `;
+    const slots = this.shadowRoot.querySelectorAll('slot');
+    slots[1].addEventListener('slotchange', (event) => {
+      console.dir(slots[1].assignedNodes());
+    });
+
+    const cancelButton = this.shadowRoot.getElementById('cancel-btn');
+    const confirmButton = this.shadowRoot.getElementById('confirm-btn');
+
+    cancelButton.addEventListener('click', this._cancel.bind(this));
+    confirmButton.addEventListener('click', this._confirm.bind(this));
+    // cancelButton.addEventListener('cancel', () => {
+    //   console.log('cancel inside the component');
+    // });
   }
 
   atrributeConnectedCallback(name, oldvalue, newValue) {
@@ -98,6 +109,27 @@ class Modal extends HTMLElement {
     this.setAttribute('opened', '');
     this.isOpen = true;
   }
+
+  hide() {
+    if (this.hasAttribute('opened')) {
+      this.removeAttribute('opened');
+    }
+    this.isOpen = false;
+  }
+
+  _cancel(event) {
+    this.hide();
+    const cancelEvent = new Event('cancel', { bubbles: true, composed: true });
+    event.target.dispatchEvent(cancelEvent);
+  }
+
+  _confirm() {
+    this.hide();
+    const confirmEvent = new Event('confirm');
+    this.dispatchEvent(confirmEvent);
+  }
 }
 
 customElements.define('uc-modal', Modal);
+
+// _cancel and _confirm work the same way, _confirm uses a shorter version by not having the event parameter.
