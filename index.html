@@ -35,11 +35,18 @@
 
     <hr />
 
-    <p>please confirm your choice</p>
-    <button>Show details & confirm</button>
-
     <uc-modal>
       <p>With your confirmation you agree to ...</p>
     </uc-modal>
+    <p>please confirm your choice</p>
+    <button>Show details & confirm</button>
+
+    <script>
+      const confirmButton = document.querySelector('button');
+      const modal = document.querySelector('uc-modal');
+      confirmButton.addEventListener('click', () => {
+        modal.setAttribute('opened', '');
+      });
+    </script>
   </body>
 </html>
