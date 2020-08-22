@@ -9,15 +9,19 @@ class Tooltip extends HTMLElement {
       <style>    
         div {
           font-weight: normal;
+          background-color: black;
+          color: white;
           position: absolute;
           top: 1.5rem;
-          left: .75rem;
-          background-color: #000;
-          color: #fff;
-          z-index: 10; 
-          padding: .15rem;
+          left: 0.75rem;
+          z-index: 10;
+          padding: 0.15rem;
           border-radius: 3px;
-          box-shadow: 1px 1px 6px rgba(0,0,0, 0.26)
+          box-shadow: 1px 1px 6px rgba(0,0,0,0.26);
+        }
+
+        :host {
+          position: relative;
         }
 
         :host(.important) {
@@ -34,7 +38,6 @@ class Tooltip extends HTMLElement {
         }
 
         ::slotted(.highlight) {
-          // background-color: azure !important; 
           border-bottom: 1px dotted red;
         }
 
@@ -64,7 +67,7 @@ class Tooltip extends HTMLElement {
       'mouseleave',
       this._hideToolTip.bind(this)
     );
-    this.style.position = 'relative';
+    this._render();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -86,7 +89,7 @@ class Tooltip extends HTMLElement {
   }
 
   _render() {
-    let tooltipContainer;
+    let tooltipContainer = this.shadowRoot.querySelector('div');
     if (this._tooltipVisible) {
       tooltipContainer = document.createElement('div');
       tooltipContainer.textContent = this._tooltipText;
